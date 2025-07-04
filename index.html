@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Sistema de Gerenciamento de Pedidos</title>
+    <link rel="stylesheet" href="/assets/css/_theme.css">
+</head>
+<body>
+    <header class="header">
+        <div class="logo">Sistema de Gestão de Serviços</div>
+        <div class="user-info"></div>
+    </header>
+
+    <main class="main-content">
+        <!-- Estatísticas -->
+        <div class="stats">
+            <div class="stat-card">
+                <div class="stat-number"></div>
+                <div class="stat-label">Serviços Realizados</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-fat">0</div>
+                <div class="stat-label">Faturamento</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-clients"></div>
+                <div class="stat-label">Clientes Ativos</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-agends"></div>
+                <div class="stat-label">Serviços Agendados</div>
+            </div>
+        </div>
+
+        <!-- Solicitações Recentes -->
+        <div class="section">
+            <div class="section-header">Serviços</div>
+            <div class="section-content">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Cliente</th>
+                            <th>Serviço</th>
+                            <th>Status</th>
+                            <th>Valor</th>
+                            <th>Data</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="serviceTableBody">
+                       
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Ações Rápidas -->
+        <div class="section">
+            <div class="section-header">Ações Rápidas</div>
+            <div class="section-content">
+                <div class="actions">
+                    <a href="app.html" class="action-btn">Agendar Serviço</a>
+                    <button class="action-btn" id="remove-services">Limpar</button>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="/assets/js/app.js"></script>
+    <script src="/assets/js/dashboard.js"></script>
+</body>
+</html>
