@@ -16,7 +16,8 @@ function renderServicesTable() {
             <td>${service.descricao}</td>
             <td><span class="status ${service.select.toLowerCase()}">${service.select}</span></td>
             <td>R$ ${parseFloat(service.valor).toFixed(2)}</td>
-            <td>${service.data || 'N/A'}</td> <td><button class="btn-concluir" data-id="${service.id}">Concluir</button></td>
+            <td>${service.data}</td> 
+            <td><button class="btn-concluir" data-id="${service.id}">Concluir</button></td>
             <button class="btn-remove" data-id="${service.id}">Remover</button>
         `;
 
@@ -25,13 +26,20 @@ function renderServicesTable() {
 
     // Chama a função para adicionar os ouvintes APÓS todos os botões terem sido criados
     attachDoneServiceListeners();
+    addRemoveEventListeners();
 }
 
+const btnClear = document.querySelector('#remove-services');
+btnClear.addEventListener('click', () => {
+    localStorage.removeItem('listServices');
+    window.location.reload();
 
-// --- Funções de Contagem (Sem Alterações na lógica principal) ---
+})
+
+
 function servicesCount(){
     const statCountServices = document.querySelector('.stat-agends');
-    if (statCountServices) { // Sempre bom verificar se o elemento existe
+    if (statCountServices) { 
         statCountServices.innerHTML = services.length;
         statCountServices.classList.add('stat-number');
     }
@@ -100,6 +108,32 @@ function attachDoneServiceListeners() {
     });
 }
 
+function addRemoveEventListeners() {
+    const btns = document.querySelectorAll('.btn-remove');
+
+    btns.forEach((btn) => {
+        btn.addEventListener('click', (e) => {
+            const id = e.target.dataset.id;
+
+            // Procura o índice correto no array pelo ID
+            const index = services.findIndex(service => service.id === id);
+
+            // Se encontrou, remove
+            if (index !== -1) {
+                services.splice(index, 1);
+                localStorage.setItem('listServices', JSON.stringify(services));
+
+                // Atualiza a interface
+                renderServicesTable();
+                servicesCount();
+                servicesClient();
+                servicesStatus();
+            }
+        });
+    });
+}
+
+
 
 // --- Execução Inicial ---
 document.addEventListener('DOMContentLoaded', () => {
@@ -110,6 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
     servicesCount();
     servicesClient();
     servicesStatus();
+    addRemoveEventListeners();
     
 });
 
